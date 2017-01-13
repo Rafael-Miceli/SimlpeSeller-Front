@@ -18,9 +18,12 @@
     "gulp-eslint": "^0.15.0",
     "gulp-open": "^1.0.0",
     "jquery": "^2.1.4",
-    "react": "^0.13.3",
-    "react-router": "^0.13.3",
+    "react": "^15.4.2",
     "reactify": "^1.1.1",
     "vinyl-source-stream": "^1.1.0"
+  },
+  "devDependencies": {
+    "eslint-config-defaults": "^9.0.0",
+    "eslint-plugin-react": "^6.9.0"
   }
 }
