@@ -8,20 +8,27 @@ class Product extends Component {
     return (
       <div>
         Criar Produto
-        <div>
-          <input type="text" name="productName" placeholder="Nome" required />          
+        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input className="mdl-textfield__input" type="text" name="productName" id="productName" required />          
+          <label className="mdl-textfield__label" for="productName">Nome</label>          
         </div>
         <div>
           <Creatable />
         </div>
-        <div>
-          <input type="text" name="sellingPrice" placeholder="Preço de Venda" required />          
+        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input className="mdl-textfield__input" type="text" name="sellingPrice" id="sellingPrice" required pattern="-?[0-9]*(\.[0-9]+)?" />          
+          <label className="mdl-textfield__label" for="sellingPrice">Preço de Venda</label>       
+          <span className="mdl-textfield__error">Preço de venda deve ser um número!</span>   
+        </div>
+        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input className="mdl-textfield__input" type="text" name="buyingPrice" id="buyingPrice" required pattern="-?[0-9]*(\.[0-9]+)?" />          
+          <label className="mdl-textfield__label" for="buyingPrice">Preço de Compra</label>       
+          <span className="mdl-textfield__error">Preço de compra deve ser um número!</span>   
         </div>
         <div>
-          <input type="text" name="buyingPrice" placeholder="Preço de Compra" required />          
-        </div>
-        <div>
-          <input type="button" name="btnCreate" value="Criar" />          
+          <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+            Criar
+          </button>
         </div>
       </div>
     );
