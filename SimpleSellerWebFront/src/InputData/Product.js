@@ -1,12 +1,29 @@
 import React, { Component } from 'react';
-import Select, { Creatable } from 'react-select';
-
-import 'react-select/dist/react-select.css';
+import { Modal } from 'react-bootstrap';
 
 class Product extends Component {
 
+  constructor() {
+    super();
+
+    this.state = {
+      showModal: false
+    };
+  }
+
+  modalAdicionarFornecedor() {
+    console.log("Modal adicionando fornecedor");
+    this.setState({showModal: true});
+  }
+
   adicionarFornecedor() {
     console.log("Adicionando fornecedor");
+    this.setState({ showModal: false });
+  }
+
+  fecharModal() {
+    console.log("Apenas fechando o modal");
+    this.setState({ showModal: false });
   }
 
   render() {
@@ -22,7 +39,7 @@ class Product extends Component {
           <input className="mdl-textfield__input" type="text" id="fornecedor" value="" readOnly tabIndex="-1" />
           <label htmlFor="fornecedor" className="mdl-textfield__label">Fornecedor</label>
           <ul htmlFor="fornecedor" className="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-              <li onClick={this.adicionarFornecedor} className="mdl-menu__item">Criar novo <i className="material-icons">add</i></li>
+              <li onClick={this.modalAdicionarFornecedor.bind(this)} className="mdl-menu__item">Criar novo <i className="material-icons">add</i></li>
               <li className="mdl-menu__item">Forn 1</li>
               <li className="mdl-menu__item">Forn 2</li>
           </ul>
@@ -44,6 +61,20 @@ class Product extends Component {
             Criar
           </button>
         </div>
+
+        <Modal show={this.state.showModal} onHide={this.fecharModal.bind(this)}>
+          <Modal.Header closeButton>
+            <Modal.Title>Modal heading</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <h4>Text in a modal</h4>
+            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+
+          </Modal.Body>
+          <Modal.Footer>
+            <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onClick={this.adicionarFornecedor.bind(this)}>Adicionar Fornecedor</button>
+          </Modal.Footer>
+        </Modal>
       </div>
     );
   }
