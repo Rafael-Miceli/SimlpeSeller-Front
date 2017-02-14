@@ -7,7 +7,8 @@ class Product extends Component {
     super();
 
     this.state = {
-      showModal: false
+      showModal: false,
+      nomeFornecedor: ""
     };
   }
 
@@ -17,8 +18,8 @@ class Product extends Component {
   }
 
   adicionarFornecedor() {
-    console.log("Adicionando fornecedor");
-    this.setState({ showModal: false });
+    console.log("Adicionando fornecedor ", this.state.nomeFornecedor);
+    this.setState({ showModal: false });    
   }
 
   fecharModal() {
@@ -66,12 +67,12 @@ class Product extends Component {
 
         <Modal show={this.state.showModal} onHide={this.fecharModal.bind(this)}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>Criar Fornecedor</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h4>Text in a modal</h4>
-            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-
+            <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input className="mdl-textfield__input" type="text" name="providerName" id="providerName" placeholder="Nome" onChange={(e) => {e.target.required = true; this.state.nomeFornecedor = e.target.value}} />                        
+            </div>
           </Modal.Body>
           <Modal.Footer>
             <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onClick={this.adicionarFornecedor.bind(this)}>Adicionar Fornecedor</button>
