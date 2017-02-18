@@ -9,7 +9,8 @@ class Product extends Component {
     this.state = {
       showModal: false,
       providerName: "",
-      providers: []
+      providers: [],
+      selectedProvider: {'value': 0, 'label': 'Selecione'}
     };
   }
 
@@ -25,8 +26,9 @@ class Product extends Component {
   addProvider() {
     console.log("Adicionando fornecedor ", this.state.providerName);    
     var actualProviders = this.state.providers;
-    actualProviders.push({'value': 3, 'label': this.state.providerName});
-    this.setState({ showModal: false, providers: actualProviders });    
+    var newProvider = {'value': actualProviders[actualProviders.length - 1].value + 1, 'label': this.state.providerName};
+    actualProviders.push(newProvider);
+    this.setState({ showModal: false, providers: actualProviders, selectedProvider: newProvider });    
   }
 
   closeModal() {
@@ -34,9 +36,9 @@ class Product extends Component {
     this.setState({ showModal: false });
   }
 
-  listProviders() {
-    return this.state.providers.map((provider)=>{
-       return <li id={provider.value} className="mdl-menu__item">{provider.label}</li>
+  listProviders() {   
+    return this.state.providers.map((provider)=> {
+       return <li onClick={(e) => {console.log(provider); this.setState({selectedProvider: provider});}} key={provider.value} className="mdl-menu__item">{provider.label}</li>
     }); 
   }
 
@@ -49,10 +51,10 @@ class Product extends Component {
         </div>
         <div>
         <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
-          <input className="mdl-textfield__input" type="text" id="fornecedor" value="" readOnly tabIndex="-1" onChange={(e) => {e.target.required = true}} />
-          <label htmlFor="fornecedor" className="mdl-textfield__label">Fornecedor*</label>
-          <ul htmlFor="fornecedor" className="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-              <li onClick={this.modalAddProvider.bind(this)} className="mdl-menu__item">Criar novo <i className="material-icons">add</i></li>              
+          <input className="mdl-textfield__input" type="text" id="provider" value={this.state.selectedProvider.label} readOnly tabIndex="-1" onChange={(e) => {e.target.required = true;}} />
+          <label htmlFor="provider" className="mdl-textfield__label">Fornecedor*</label>
+          <ul htmlFor="provider" className="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+              <li key="0" onClick={this.modalAddProvider.bind(this)} className="mdl-menu__item">Criar novo <i className="material-icons">add</i></li>              
               {this.listProviders()}
           </ul>
         </div>                       
@@ -82,7 +84,7 @@ class Product extends Component {
           </Modal.Header>
           <Modal.Body>
             <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input className="mdl-textfield__input" type="text" name="providerName" id="providerName" placeholder="Nome" onChange={(e) => {e.target.required = true; this.state.providerName = e.target.value}} />                        
+              <input className="mdl-textfield__input" type="text" name="providerName" id="providerName" placeholder="Nome" onChange={(e) => {e.target.required = true; this.setState({providerName: e.target.value});}} />                        
             </div>
           </Modal.Body>
           <Modal.Footer>
