@@ -15,7 +15,17 @@ class Product extends Component {
   }
 
   componentDidMount() {
-    this.setState({providers: [{'value': 1, 'label': 'Mariana'}, {'value': 2, 'label': 'Fê'}]})
+    fetch('http://localhost:5000/Fornecedores/FornecedorComboBox')
+    .then((response)=>{
+        console.log('Recbido ', response);
+        return response.json();
+    })
+    .then((result)=>{         
+        console.log(result);   
+        this.setState({providers: result})
+    });
+
+    //this.setState({providers: [{'value': 1, 'label': 'Mariana'}, {'value': 2, 'label': 'Fê'}]})
   }
 
   modalAddProvider() {
@@ -44,7 +54,7 @@ class Product extends Component {
 
   render() {
     return (
-      <div>
+      <div className="mdl-cell mdl-cell--4-col mdl-typography--text-center">
         <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
           <input className="mdl-textfield__input" type="text" name="productName" id="productName" onChange={(e) => {e.target.required = true}} />          
           <label className="mdl-textfield__label" htmlFor="productName">Nome*</label>          
