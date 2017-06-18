@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import './App.css';
 import Product from './InputData/Product';
+import Login from './Login';
 
-class App extends Component {
+var unauthorized = true;
+
+class App extends Component {  
+  
   render() {
+
+    if (unauthorized)
+      return (<Login />);
+
     return (
       <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">                
         
